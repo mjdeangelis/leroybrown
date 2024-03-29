@@ -16,7 +16,7 @@ export default function Confirmation() {
           Thanks for registering!
         </h1>
         <p className='mt-3'>
-          Better get practicing. And remember, it's for the pups!
+          Better get practicing. And remember, it&apos;s for the pups!
         </p>
       </div>
     </div>
