@@ -15,6 +15,9 @@ export default function Confirmation() {
         <h1 className='mt-6 text-2xl text-center font-bold'>
           Thanks for registering!
         </h1>
+        <p className='mt-3 text-green-500 font-semibold'>
+          <strong>Payment succeeded.</strong>
+        </p>
         <p className='mt-3'>
           Better get practicing. And remember, it&apos;s for the pups!
         </p>
