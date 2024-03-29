@@ -15,13 +15,13 @@ export default function Registration() {
             className='max-w-40 w-full'
           />
         </div>
-        <h1 className='text-2xl text-center font-bold'>
-          Leroy Brown Invitational Registration
+        <h1 className='mt-6 text-3xl sm:text-5xl font-extrabold text-center text-slate-900 tracking-[-0.04em]'>
+          Leroy Brown Invitational
         </h1>
-        <p className='mt-3'>Bensalem Country Club</p>
-        <p>
-          <em>August 3rd, 2024</em>
-        </p>
+        <div className='mt-6 text-center'>
+          <p className='text-lg font-semibold'>Bensalem Country Club</p>
+          <p className='text-md'>August 3rd, 2024</p>
+        </div>
       </div>
 
       {/* {clientSecret && (

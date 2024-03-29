@@ -12,13 +12,18 @@ export default function Home() {
         />
       </div>
       <div className='text-center'>
-        <h1 className='mt-6 text-2xl text-center font-bold'>
+        <h1 className='mt-6 text-3xl sm:text-5xl font-extrabold text-center text-slate-900 tracking-[-0.04em]'>
           Leroy Brown Invitational
         </h1>
-        <p className='mt-3 text-lg font-semibold'>Bensalem Country Club</p>
-        <p>August 3rd, 2024</p>
-        <p>For the pups.</p>
-        <p className='mt-4'>Full website coming soon.</p>
+        <div className='mt-6'>
+          <p className='text-lg font-semibold'>Bensalem Country Club</p>
+          <p className='text-md'>August 3rd, 2024</p>
+        </div>
+
+        <div className='mt-4 text-base leading-7 text-slate-600'>
+          <p>For the pups.</p>
+          <p>Full website coming soon.</p>
+        </div>
       </div>
     </main>
   );

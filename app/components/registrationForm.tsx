@@ -127,7 +127,7 @@ export default function RegistrationForm() {
       <form onSubmit={handleSubmit}>
         <div className='space-y-12'>
           <div className='mt-10 border-t border-b border-gray-900/10 py-12'>
-            <h2 className='text-xl font-semibold leading-7 text-gray-900'>
+            <h2 className='text-xl font-semibold leading-7 text-gray-900 tracking-[-0.02em]'>
               Team Information
             </h2>
 
@@ -447,7 +447,7 @@ export default function RegistrationForm() {
   } else {
     return (
       <div className='mt-10 border-t border-b border-gray-900/10 py-12'>
-        <h2 className='text-xl font-semibold leading-7 text-gray-900'>
+        <h2 className='text-xl font-semibold leading-7 text-gray-900 tracking-[-0.02em]'>
           Ticket Options
         </h2>
         <div className='mt-6 flex flex-wrap gap-4'>
@@ -522,7 +522,7 @@ export default function RegistrationForm() {
           )}
         </div>
 
-        <h2 className='mt-12 text-xl font-semibold leading-7 text-gray-900'>
+        <h2 className='mt-12 text-xl font-semibold leading-7 text-gray-900 tracking-[-0.02em]'>
           Payment Information
         </h2>
 
