@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Logo from "/public/logo-min.png";
 
-export default function Home() {
+export default function Confirmation() {
   return (
-    <main className='flex flex-col justify-center items-center h-screen'>
+    <div className='flex flex-col justify-center items-center h-screen'>
       <div className='my-2 mx-auto'>
         <Image
           src={Logo}
@@ -13,13 +13,12 @@ export default function Home() {
       </div>
       <div className='text-center'>
         <h1 className='mt-6 text-2xl text-center font-bold'>
-          Leroy Brown Invitational
+          Thanks for registering!
         </h1>
-        <p className='mt-3 text-lg font-semibold'>Bensalem Country Club</p>
-        <p>August 3rd, 2024</p>
-        <p>For the pups.</p>
-        <p className='mt-4'>Full website coming soon.</p>
+        <p className='mt-3'>
+          Better get practicing. And remember, it's for the pups!
+        </p>
       </div>
-    </main>
+    </div>
   );
 }
