@@ -501,7 +501,7 @@ export default function RegistrationForm() {
                   />
                   <span>Invitation Pre-Sale Team</span>
                 </div>
-                <div className='text-gray-600'>$160</div>
+                <div className='text-gray-600'>$320</div>
               </label>
               {/* Public On-Sale Team - Unavailable */}
               <label className='block border p-4 rounded cursor-pointer opacity-50'>
@@ -515,7 +515,7 @@ export default function RegistrationForm() {
                   />
                   <span>Public On-Sale Team</span>
                 </div>
-                <div className='text-gray-600 line-through'>$160</div>
+                <div className='text-gray-600 line-through'>$320</div>
                 <div className='text-xs text-red-500'>Available Soon</div>
               </label>
             </>
