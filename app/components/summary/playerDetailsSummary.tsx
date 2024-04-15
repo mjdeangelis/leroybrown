@@ -29,13 +29,13 @@ export const PlayerDetailsSummary = ({
       <div className='sm:col-span-3'>
         {" "}
         <p className='text-sm text-gray-400'>
-          <strong>Average Score:</strong> {playerDetails.averageScore}
+          <strong>Average score:</strong> {playerDetails.averageScore}
         </p>
       </div>
       <div className='sm:col-span-3'>
         {" "}
         <p className='text-sm text-gray-400'>
-          <strong>Shirt Size:</strong> {playerDetails.shirtSize}
+          <strong>Shirt size:</strong> {playerDetails.shirtSize}
         </p>
       </div>
     </div>

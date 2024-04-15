@@ -282,13 +282,13 @@ export default function RegistrationForm() {
                   />
                 </div>
               </div>
-              {/* Player 1 Phone Number */}
+              {/* Player 1 Phone number */}
               <div className='sm:col-span-3'>
                 <label
                   htmlFor='phone'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Phone Number
+                  Phone number
                 </label>
                 <div className='mt-2'>
                   <Input
@@ -302,13 +302,13 @@ export default function RegistrationForm() {
                   />
                 </div>
               </div>
-              {/* Player 1 Average Score */}
+              {/* Player 1 Average score */}
               <div className='sm:col-span-3'>
                 <label
                   htmlFor='averageScore'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Average Score
+                  Average score
                 </label>
                 <div className='mt-2'>
                   <Select
@@ -337,13 +337,13 @@ export default function RegistrationForm() {
                   </Select>
                 </div>
               </div>
-              {/* Player 1 Shirt Size */}
+              {/* Player 1 Shirt size */}
               <div className='sm:col-span-3'>
                 <label
                   htmlFor='shirtSize'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Shirt Size
+                  Shirt size
                 </label>
                 <div className='mt-2'>
                   <Select
@@ -450,13 +450,13 @@ export default function RegistrationForm() {
                     />
                   </div>
                 </div>
-                {/* Player 2 Phone Number */}
+                {/* Player 2 Phone number */}
                 <div className='sm:col-span-3'>
                   <label
                     htmlFor='phone'
                     className='block text-sm font-medium leading-6 text-gray-900'
                   >
-                    Phone Number
+                    Phone number
                   </label>
                   <div className='mt-2'>
                     <Input
@@ -470,13 +470,13 @@ export default function RegistrationForm() {
                     />
                   </div>
                 </div>
-                {/* Player 2 Average Score */}
+                {/* Player 2 Average score */}
                 <div className='sm:col-span-3'>
                   <label
                     htmlFor='averageScore'
                     className='block text-sm font-medium leading-6 text-gray-900'
                   >
-                    Average Score
+                    Average score
                   </label>
                   <div className='mt-2'>
                     <Select
@@ -505,13 +505,13 @@ export default function RegistrationForm() {
                     </Select>
                   </div>
                 </div>
-                {/* Player 2 Shirt Size */}
+                {/* Player 2 Shirt size */}
                 <div className='sm:col-span-3'>
                   <label
                     htmlFor='shirtSize'
                     className='block text-sm font-medium leading-6 text-gray-900'
                   >
-                    Shirt Size
+                    Shirt size
                   </label>
                   <div className='mt-2'>
                     <Select
