@@ -86,17 +86,7 @@ export default function PaymentForm(props: PaymentFormProps) {
   return (
     <>
       <div className='mt-6 flex items-center justify-start'>
-        {/* options={paymentElementOptions */}
         <PaymentElement id='payment-element' className='w-full' />
-        {/* <button disabled={isLoading || !stripe || !elements} id='submit'>
-            <span id='button-text'>
-              {isLoading ? (
-                <div className='spinner' id='spinner'></div>
-              ) : (
-                "Pay now"
-              )}
-            </span>
-          </button> */}
         {/* Show any error or success messages */}
         {message && <div id='payment-message'>{message}</div>}
       </div>

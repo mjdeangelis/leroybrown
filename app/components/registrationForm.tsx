@@ -215,6 +215,8 @@ export default function RegistrationForm() {
     }
   };
 
+  const submitPayment = () => {};
+
   if (!isCheckoutPage) {
     return (
       <form onSubmit={handleSubmit}>
@@ -531,7 +533,7 @@ export default function RegistrationForm() {
                 <span>Please wait</span>
               </>
             ) : (
-              <span>Contine to payment</span>
+              <span>Continue to payment</span>
             )}
           </Button>
         </div>
