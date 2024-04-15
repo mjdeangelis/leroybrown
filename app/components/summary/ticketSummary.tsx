@@ -18,7 +18,8 @@ export const TicketSummary = ({
     <div className='mt-6'>
       <Table>
         <TableCaption>
-          All tickets include golf, 2 drinks, and complimentary hat.
+          All tickets includes golf, post dinner buffet and drinks, and free
+          gift.
         </TableCaption>
         <TableHeader>
           <TableRow>
