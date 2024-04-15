@@ -5,6 +5,8 @@ import {
   Elements,
 } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
+import { Button } from "./ui/button";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 const paymentElementOptions = {
   layout: "tabs",
@@ -52,13 +54,12 @@ export default function PaymentForm(props: PaymentFormProps) {
   }, [stripe]);
 
   const submitPayment = async () => {
+    setIsLoading(true);
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
-    setIsLoading(true);
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -107,14 +108,21 @@ export default function PaymentForm(props: PaymentFormProps) {
         >
           Back to edit team
         </button>
-        <button
+
+        <Button
           type='submit'
           disabled={isLoading || !stripe || !elements}
           onClick={submitPayment}
-          className='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
         >
-          Confirm payment
-        </button>
+          {isLoading ? (
+            <>
+              <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+              <span>Processing payment</span>
+            </>
+          ) : (
+            <span>Submit Payment</span>
+          )}
+        </Button>
       </div>
     </>
   );
