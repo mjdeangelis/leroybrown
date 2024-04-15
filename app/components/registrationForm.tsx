@@ -34,8 +34,8 @@ import { TicketSummary } from "./summary/ticketSummary";
 const initialPlayerState = {
   name: "",
   phone: "",
-  averageScore: "DEFAULT",
-  shirtSize: "DEFAULT",
+  averageScore: "",
+  shirtSize: "",
 };
 
 type StripeTheme = "stripe" | "night" | "flat" | undefined;
@@ -58,6 +58,7 @@ export default function RegistrationForm() {
   const [teamId, setTeamId] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -110,39 +111,84 @@ export default function RegistrationForm() {
     appearance,
   };
 
+  const validateForm = () => {
+    let errors = [];
+    console.log("player one", playerOne);
+    if (playerOne.name === "" || playerOne.name === null) {
+      errors.push("Player one name");
+    }
+    if (playerOne.phone === "" || playerOne.phone === null) {
+      errors.push("Player one phone");
+    }
+    if (playerOne.averageScore === "" || playerOne.averageScore === null) {
+      errors.push("Player one average score");
+    }
+    if (playerOne.shirtSize === "" || playerOne.shirtSize === null) {
+      errors.push("Player one shirt size");
+    }
+
+    if (registeringTeammate) {
+      if (playerTwo.name === "" || playerTwo.name === null) {
+        errors.push("Player two name");
+      }
+      if (playerTwo.phone === "" || playerTwo.phone === null) {
+        errors.push("Player two phone");
+      }
+      if (playerTwo.averageScore === "" || playerTwo.averageScore === null) {
+        errors.push("Player two average score");
+      }
+      if (playerTwo.shirtSize === "" || playerTwo.shirtSize === null) {
+        errors.push("Player two shirt size");
+      }
+    } else {
+      if (teammateName === "" || teammateName === null) {
+        errors.push("Teammate name");
+      }
+    }
+
+    setErrors(errors);
+    if (errors.length) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const handleSubmit = async (e: any) => {
     // todo: loading state
     setIsLoading(true);
     e.preventDefault();
 
-    const endpoint = teamId ? `update-team/${teamId}` : "register-team";
-    const requestBody = {
-      players: [{ ...playerOne }],
-      teammateName,
-      registeringTeammate,
-      email,
-    };
-    if (registeringTeammate) {
-      requestBody.players.push({ ...playerTwo });
-      // stripeOptions.amount = 32000;
-    } else {
-      // stripeOptions.amount = 16000;
-    }
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
-    };
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}registration/${endpoint}`,
-      requestOptions
-    );
-    const data = await response.json();
-    console.log("Data", data);
-    if (data) {
-      console.log("checkout page...");
-      setIsCheckoutPage(true);
-      setTeamId(data.teamId);
+    if (validateForm()) {
+      const endpoint = teamId ? `update-team/${teamId}` : "register-team";
+      const requestBody = {
+        players: [{ ...playerOne }],
+        teammateName,
+        registeringTeammate,
+        email,
+      };
+      if (registeringTeammate) {
+        requestBody.players.push({ ...playerTwo });
+        // stripeOptions.amount = 32000;
+      } else {
+        // stripeOptions.amount = 16000;
+      }
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      };
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}registration/${endpoint}`,
+        requestOptions
+      );
+      const data = await response.json();
+      console.log("Data", data);
+      if (data) {
+        console.log("checkout page...");
+        setIsCheckoutPage(true);
+        setTeamId(data.teamId);
+      }
     }
 
     // todo: loading state
@@ -173,7 +219,21 @@ export default function RegistrationForm() {
     return (
       <form onSubmit={handleSubmit}>
         <div className='space-y-12'>
-          <div className='mt-10 border-t border-b border-gray-900/10 py-12'>
+          <div className='mt-10 border-t border-b border-gray-900/10 py-6'>
+            {errors.length > 0 && (
+              <div
+                className='mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4'
+                role='alert'
+              >
+                <p className='font-bold'>Please fix the following errors:</p>
+                <ul className='list-disc pl-5'>
+                  {errors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <h2 className='mb-2 scroll-m-20 text-2xl text-gray-900 font-semibold tracking-tight transition-colors first:mt-0'>
               1. Team Details
             </h2>
