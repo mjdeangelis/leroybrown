@@ -236,7 +236,7 @@ export default function RegistrationForm() {
     return (
       <form onSubmit={handleSubmit}>
         <div className='space-y-12'>
-          <div className='mt-10 border-b border-gray-900/10 py-6'>
+          <div className='mt-10 border-gray-900/10 py-6'>
             {errors.length > 0 && (
               <div
                 className='mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4'
