@@ -96,15 +96,25 @@ export default function PaymentForm(props: PaymentFormProps) {
         } else {
           setMessage("An unexpected error occurred.");
         }
+
+        setIsLoading(false);
       });
   };
 
   return (
     <>
-      <div className='mt-6 flex items-center justify-start'>
+      <div className='mt-6 flex flex-col items-center justify-start'>
         <PaymentElement id='payment-element' className='w-full' />
         {/* Show any error or success messages */}
-        {message && <div id='payment-message'>{message}</div>}
+        {message && (
+          <div
+            className='my-6 text-sm bg-red-100 border-t-4 border-red-500 text-red-700 p-4 w-full'
+            role='alert'
+            id='payment-message'
+          >
+            {message}
+          </div>
+        )}
       </div>
       <div className='mt-6 flex items-center justify-end gap-x-6'>
         <button
