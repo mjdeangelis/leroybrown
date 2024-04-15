@@ -46,6 +46,8 @@ type StripeTheme = "stripe" | "night" | "flat" | undefined;
 const stripePromise = loadStripe(
   "pk_test_51OxJkVJaaeySy4MytTgxAEexLCHKTErULchhoa4U9py33GKYCZ7pdCSCWadW0LH0rkq6QYTZN3xCIz8oyrxEYtks00rLeRmcMN"
 );
+const GENERIC_ERROR_MESSAGE =
+  "There was a problem submitting your registration. Please try again.";
 
 export default function RegistrationForm() {
   const [isCheckoutPage, setIsCheckoutPage] = useState(false);
@@ -58,6 +60,7 @@ export default function RegistrationForm() {
   const [teamId, setTeamId] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const [customerId, setCustomerId] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
@@ -67,19 +70,26 @@ export default function RegistrationForm() {
         ? "lbi-presale-team"
         : "lbi-presale-individual";
 
-      fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}registration/create-payment-intent`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            customer: playerOne,
-            id: purchaseId,
-          }),
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => setClientSecret(data.clientSecret));
+      try {
+        fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}registration/create-payment-intent`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              customer: playerOne,
+              id: purchaseId,
+            }),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setClientSecret(data.clientSecret);
+            setCustomerId(data.customerId);
+          });
+      } catch (error) {
+        setErrors([GENERIC_ERROR_MESSAGE]);
+      }
     }
   }, [isCheckoutPage]);
 
@@ -178,16 +188,21 @@ export default function RegistrationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
       };
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}registration/${endpoint}`,
-        requestOptions
-      );
-      const data = await response.json();
-      console.log("Data", data);
-      if (data) {
-        console.log("checkout page...");
-        setIsCheckoutPage(true);
-        setTeamId(data.teamId);
+
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}registration/${endpoint}`,
+          requestOptions
+        );
+        const data = await response.json();
+        console.log("Data", data);
+        if (data) {
+          console.log("checkout page...");
+          setIsCheckoutPage(true);
+          setTeamId(data.teamId);
+        }
+      } catch (error) {
+        setErrors([GENERIC_ERROR_MESSAGE]);
       }
     }
 
@@ -572,7 +587,11 @@ export default function RegistrationForm() {
 
             {clientSecret && (
               <Elements options={stripeOptions} stripe={stripePromise}>
-                <PaymentForm onNavigateBack={() => setIsCheckoutPage(false)} />
+                <PaymentForm
+                  customerId={customerId}
+                  email={email}
+                  onNavigateBack={() => setIsCheckoutPage(false)}
+                />
               </Elements>
             )}
           </div>
