@@ -294,6 +294,7 @@ export default function RegistrationForm() {
                   <Input
                     name='phone'
                     id='phone'
+                    placeholder='(xxx) xxx-xxxx'
                     required
                     autoComplete='tel'
                     onChange={(e) => handleInputChange(e, "player1")}
@@ -461,6 +462,7 @@ export default function RegistrationForm() {
                     <Input
                       name='phone'
                       id='phone'
+                      placeholder='(xxx) xxx-xxxx'
                       autoComplete='tel'
                       required={registeringTeammate}
                       onChange={(e) => handleInputChange(e, "player2")}
