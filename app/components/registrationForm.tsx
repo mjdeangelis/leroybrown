@@ -1,23 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import {
-  PaymentElement,
-  useStripe,
-  useElements,
-  Elements,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import {
   Appearance,
   StripeElementsOptions,
   loadStripe,
 } from "@stripe/stripe-js";
-import PaymentForm from "./paymentForm";
-import PaymentSummary from "./paymentSummary";
+
+import InputMask from "react-input-mask";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Separator } from "@/app/components/ui/separator";
-
 import {
   Select,
   SelectContent,
@@ -25,11 +19,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
-
 import { Label } from "@/app/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
+
 import { RegistrationSummary } from "./summary/registrationSummary";
 import { TicketSummary } from "./summary/ticketSummary";
+import PaymentForm from "./paymentForm";
 
 const initialPlayerState = {
   name: "",
@@ -291,7 +286,23 @@ export default function RegistrationForm() {
                   Phone number
                 </label>
                 <div className='mt-2'>
-                  <Input
+                  <InputMask
+                    mask='(999) 999-9999'
+                    maskPlaceholder={null}
+                    alwaysShowMask={false}
+                    value={playerOne.phone}
+                    onChange={(e) => handleInputChange(e, "player1")}
+                  >
+                    <Input
+                      type='tel'
+                      name='phone'
+                      id='phone'
+                      autoComplete='tel'
+                      placeholder='(xxx) xxx-xxxx'
+                      required
+                    />
+                  </InputMask>
+                  {/* <Input
                     name='phone'
                     id='phone'
                     placeholder='(xxx) xxx-xxxx'
@@ -299,7 +310,7 @@ export default function RegistrationForm() {
                     autoComplete='tel'
                     onChange={(e) => handleInputChange(e, "player1")}
                     value={playerOne.phone}
-                  />
+                  /> */}
                 </div>
               </div>
               {/* Player 1 Average score */}
@@ -459,7 +470,23 @@ export default function RegistrationForm() {
                     Phone number
                   </label>
                   <div className='mt-2'>
-                    <Input
+                    <InputMask
+                      mask='(999) 999-9999'
+                      maskPlaceholder={null}
+                      alwaysShowMask={false}
+                      value={playerTwo.phone}
+                      onChange={(e) => handleInputChange(e, "player2")}
+                    >
+                      <Input
+                        type='tel'
+                        name='phone'
+                        id='phone'
+                        autoComplete='tel'
+                        placeholder='(xxx) xxx-xxxx'
+                        required
+                      />
+                    </InputMask>
+                    {/* <Input
                       name='phone'
                       id='phone'
                       placeholder='(xxx) xxx-xxxx'
@@ -467,7 +494,7 @@ export default function RegistrationForm() {
                       required={registeringTeammate}
                       onChange={(e) => handleInputChange(e, "player2")}
                       value={playerTwo.phone}
-                    />
+                    /> */}
                   </div>
                 </div>
                 {/* Player 2 Average score */}
