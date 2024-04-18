@@ -122,34 +122,38 @@ export default function RegistrationForm() {
   const validateForm = () => {
     let errors = [];
     if (playerOne.name === "" || playerOne.name === null) {
-      errors.push("Player one name");
+      errors.push("Player 1 name");
     }
     if (playerOne.phone === "" || playerOne.phone === null) {
-      errors.push("Player one phone");
+      errors.push("Player 1 phone");
+    } else if (playerOne.phone.length !== 14) {
+      errors.push("Player 1 phone number is in an invalid format");
     }
     if (playerOne.averageScore === "" || playerOne.averageScore === null) {
-      errors.push("Player one average score");
+      errors.push("Player 1 average score");
     }
     if (playerOne.shirtSize === "" || playerOne.shirtSize === null) {
-      errors.push("Player one shirt size");
+      errors.push("Player 1 shirt size is required");
     }
 
     if (registeringTeammate) {
       if (playerTwo.name === "" || playerTwo.name === null) {
-        errors.push("Player two name");
+        errors.push("Player 2 name is required");
       }
       if (playerTwo.phone === "" || playerTwo.phone === null) {
-        errors.push("Player two phone");
+        errors.push("Player 2 phone is required");
+      } else if (playerTwo.phone.length !== 14) {
+        errors.push("Player 2 phone number is in an invalid format");
       }
       if (playerTwo.averageScore === "" || playerTwo.averageScore === null) {
-        errors.push("Player two average score");
+        errors.push("Player 2 average score is required");
       }
       if (playerTwo.shirtSize === "" || playerTwo.shirtSize === null) {
-        errors.push("Player two shirt size");
+        errors.push("Player 2 shirt size is required");
       }
     } else {
       if (teammateName === "" || teammateName === null) {
-        errors.push("Teammate name");
+        errors.push("Teammate name is required");
       }
     }
 
