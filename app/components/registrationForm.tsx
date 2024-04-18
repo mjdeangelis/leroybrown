@@ -25,6 +25,7 @@ import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
 import { RegistrationSummary } from "./summary/registrationSummary";
 import { TicketSummary } from "./summary/ticketSummary";
 import PaymentForm from "./paymentForm";
+import { generateReceiptDescription } from "../helpers/registrationHelpers";
 
 const initialPlayerState = {
   name: "",
@@ -42,6 +43,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!!);
 
 const GENERIC_ERROR_MESSAGE =
   "There was a problem submitting your registration. Please try again.";
+const RECEIPT_DESCRIPTION = "Leroy Brown Invitational";
 
 export default function RegistrationForm() {
   const [isCheckoutPage, setIsCheckoutPage] = useState(false);
@@ -54,32 +56,45 @@ export default function RegistrationForm() {
   const [teamId, setTeamId] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentIntentId, setPaymentIntentId] = useState("");
   const [customerId, setCustomerId] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    if (isCheckoutPage && !clientSecret) {
+    // Creat or update PaymentIntent as soon as the page loads
+    if (isCheckoutPage) {
       const purchaseId = registeringTeammate
         ? "lbi-presale-team"
         : "lbi-presale-individual";
-
+      const requestBody = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: playerOne,
+          id: purchaseId,
+          description: generateReceiptDescription(
+            RECEIPT_DESCRIPTION,
+            registeringTeammate
+          ),
+          customerId: customerId ?? null,
+          paymentIntentId: paymentIntentId ?? null,
+        }),
+      };
+      const endpoint = clientSecret
+        ? "update-payment-intent"
+        : "create-payment-intent";
+      const method = clientSecret ? "PUT" : "POST";
+      requestBody.method = method;
       try {
         fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}registration/create-payment-intent`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              customer: playerOne,
-              id: purchaseId,
-            }),
-          }
+          `${process.env.NEXT_PUBLIC_API_URL}registration/${endpoint}`,
+          requestBody
         )
           .then((res) => res.json())
           .then((data) => {
             setClientSecret(data.clientSecret);
             setCustomerId(data.customerId);
+            setPaymentIntentId(data.paymentIntentId);
           });
       } catch (error) {
         setErrors([GENERIC_ERROR_MESSAGE]);
