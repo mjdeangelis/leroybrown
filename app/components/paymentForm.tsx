@@ -8,10 +8,6 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
-const paymentElementOptions = {
-  layout: "tabs",
-};
-
 export interface PaymentFormProps {
   customerId: string;
   teamId: string | null;
