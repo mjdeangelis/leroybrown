@@ -76,8 +76,6 @@ export default function PaymentForm(props: PaymentFormProps) {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        // setClientSecret(data.clientSecret);
-        // setCustomerId(data.customerId);
         const { error } = await stripe.confirmPayment({
           elements,
           confirmParams: {
