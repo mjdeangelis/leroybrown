@@ -38,9 +38,8 @@ type StripeTheme = "stripe" | "night" | "flat" | undefined;
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
-const stripePromise = loadStripe(
-  "pk_test_51OxJkVJaaeySy4MytTgxAEexLCHKTErULchhoa4U9py33GKYCZ7pdCSCWadW0LH0rkq6QYTZN3xCIz8oyrxEYtks00rLeRmcMN"
-);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!!);
+
 const GENERIC_ERROR_MESSAGE =
   "There was a problem submitting your registration. Please try again.";
 
@@ -91,15 +90,7 @@ export default function RegistrationForm() {
   const appearance: Appearance = {
     theme: "stripe",
     variables: {
-      // colorPrimary: "#0570de",
-      // colorBackground: "#ffffff",
-      // colorText: "#30313d",
-      // colorDanger: "#df1b41",
       fontSizeBase: "14px",
-      // fontFamily: "Inter, system-ui, sans-serif",
-      // spacingUnit: "2px",
-      // borderRadius: "4px",
-      // See all possible variables below
     },
     rules: {
       ".Label": {
@@ -110,15 +101,11 @@ export default function RegistrationForm() {
   };
   const stripeOptions: StripeElementsOptions = {
     clientSecret,
-    // mode: "payment",
-    // amount: 16000,
-    // currency: "usd",
     appearance,
   };
 
   const validateForm = () => {
     let errors = [];
-    console.log("player one", playerOne);
     if (playerOne.name === "" || playerOne.name === null) {
       errors.push("Player one name");
     }
@@ -160,7 +147,6 @@ export default function RegistrationForm() {
   };
 
   const handleSubmit = async (e: any) => {
-    // todo: loading state
     setIsLoading(true);
     e.preventDefault();
 
@@ -174,9 +160,7 @@ export default function RegistrationForm() {
       };
       if (registeringTeammate) {
         requestBody.players.push({ ...playerTwo });
-        // stripeOptions.amount = 32000;
       } else {
-        // stripeOptions.amount = 16000;
       }
       const requestOptions = {
         method: "POST",
@@ -190,9 +174,7 @@ export default function RegistrationForm() {
           requestOptions
         );
         const data = await response.json();
-        console.log("Data", data);
         if (data) {
-          console.log("checkout page...");
           setIsCheckoutPage(true);
           setTeamId(data.teamId);
         }
@@ -201,7 +183,6 @@ export default function RegistrationForm() {
       }
     }
 
-    // todo: loading state
     setIsLoading(false);
   };
 
@@ -216,7 +197,6 @@ export default function RegistrationForm() {
 
   const handleInputChange = (e: any, player: string) => {
     const target = e.target || e;
-    console.log("Event", target);
     const { name, value } = target;
     if (player === "player1") {
       setPlayerOne((prev) => ({ ...prev, [name]: value }));
@@ -225,13 +205,12 @@ export default function RegistrationForm() {
     }
   };
 
-  const submitPayment = () => {};
-
   if (!isCheckoutPage) {
     return (
       <form onSubmit={handleSubmit}>
         <div className='space-y-12'>
           <div className='mt-10 border-gray-900/10 py-6'>
+            {/* Error display */}
             {errors.length > 0 && (
               <div
                 className='mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4'
@@ -302,15 +281,6 @@ export default function RegistrationForm() {
                       required
                     />
                   </InputMask>
-                  {/* <Input
-                    name='phone'
-                    id='phone'
-                    placeholder='(xxx) xxx-xxxx'
-                    required
-                    autoComplete='tel'
-                    onChange={(e) => handleInputChange(e, "player1")}
-                    value={playerOne.phone}
-                  /> */}
                 </div>
               </div>
               {/* Player 1 Average score */}
@@ -486,15 +456,6 @@ export default function RegistrationForm() {
                         required
                       />
                     </InputMask>
-                    {/* <Input
-                      name='phone'
-                      id='phone'
-                      placeholder='(xxx) xxx-xxxx'
-                      autoComplete='tel'
-                      required={registeringTeammate}
-                      onChange={(e) => handleInputChange(e, "player2")}
-                      value={playerTwo.phone}
-                    /> */}
                   </div>
                 </div>
                 {/* Player 2 Average score */}
@@ -625,9 +586,6 @@ export default function RegistrationForm() {
             )}
           </div>
           <div className='order-1 md:order-2 md:col-span-2 p-4'>
-            {/* <div className='bg-gray-100 p-4 rounded mb-6'>
-
-            </div> */}
             <div className='bg-gray-100 rounded p-4'>
               <h2 className='text-xl font-semibold leading-7 text-gray-900 tracking-[-0.02em] p-4'>
                 Order Summary
