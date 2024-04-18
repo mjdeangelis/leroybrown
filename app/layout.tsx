@@ -9,7 +9,10 @@ const fontSans = FontSans({
 });
 
 const metadata: Metadata = {
-  title: "Leroy Brown Invitational",
+  title: {
+    template: "%s | Leroy Brown Invitational",
+    default: "Leroy Brown Invitational",
+  },
   description: "For the pups",
 };
 

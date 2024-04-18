@@ -1,8 +1,11 @@
-"use client";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { Metadata } from "next";
 import RegistrationForm from "@/app/components/registrationForm";
 import Logo from "/public/logo-min.png";
-import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "2024 Registration | Leroy Brown Invitational",
+};
 
 export default function Registration() {
   return (
@@ -24,11 +27,7 @@ export default function Registration() {
         </div>
       </div>
 
-      {/* {clientSecret && (
-        <Elements options={options} stripe={stripePromise}> */}
       <RegistrationForm />
-      {/* </Elements>
-      )} */}
     </div>
   );
 }
