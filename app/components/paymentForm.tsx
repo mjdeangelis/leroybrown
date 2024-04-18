@@ -14,6 +14,7 @@ const paymentElementOptions = {
 
 export interface PaymentFormProps {
   customerId: string;
+  teamId: string | null;
   email: string;
   onNavigateBack: any;
 }
@@ -70,6 +71,7 @@ export default function PaymentForm(props: PaymentFormProps) {
       body: JSON.stringify({
         customerId: props.customerId,
         email: props.email,
+        teamId: props.teamId,
       }),
     })
       .then((res) => res.json())

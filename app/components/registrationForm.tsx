@@ -594,6 +594,7 @@ export default function RegistrationForm() {
               <Elements options={stripeOptions} stripe={stripePromise}>
                 <PaymentForm
                   customerId={customerId}
+                  teamId={teamId}
                   email={email}
                   onNavigateBack={() => setIsCheckoutPage(false)}
                 />
