@@ -105,11 +105,11 @@ export default function RegistrationForm() {
   const appearance: Appearance = {
     theme: "stripe",
     variables: {
-      fontSizeBase: "14px",
+      fontSizeBase: "16px",
     },
     rules: {
       ".Label": {
-        fontSize: "14px",
+        fontSize: "16px",
         fontWeight: "500",
       },
     },
@@ -119,7 +119,11 @@ export default function RegistrationForm() {
     appearance,
   };
 
-  const validateForm = () => {
+  /**
+   * Adds error messages to error array
+   * @returns boolean if form passes validation
+   */
+  const validateForm = (): boolean => {
     let errors = [];
     if (playerOne.name === "" || playerOne.name === null) {
       errors.push("Player 1 name");
@@ -252,18 +256,13 @@ export default function RegistrationForm() {
             {/* Player 1 Details */}
             <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
               <div className='sm:col-span-full'>
-                <p className='text-md font-semibold leading-6 text-gray-900'>
+                <p className='text-lg font-bold leading-6 text-gray-900'>
                   Player 1
                 </p>
               </div>
               {/* Player 1 Name */}
               <div className='sm:col-span-3'>
-                <label
-                  htmlFor='name'
-                  className='block text-sm font-medium leading-6 text-gray-900'
-                >
-                  Name
-                </label>
+                <Label htmlFor='name'>Name</Label>
                 <div className='mt-2'>
                   <Input
                     name='name'
@@ -277,12 +276,7 @@ export default function RegistrationForm() {
               </div>
               {/* Player 1 Phone number */}
               <div className='sm:col-span-3'>
-                <label
-                  htmlFor='phone'
-                  className='block text-sm font-medium leading-6 text-gray-900'
-                >
-                  Phone number
-                </label>
+                <Label htmlFor='phone'>Phone number</Label>
                 <div className='mt-2'>
                   <InputMask
                     mask='(999) 999-9999'
@@ -304,12 +298,7 @@ export default function RegistrationForm() {
               </div>
               {/* Player 1 Average score */}
               <div className='sm:col-span-3'>
-                <label
-                  htmlFor='averageScore'
-                  className='block text-sm font-medium leading-6 text-gray-900'
-                >
-                  Average score
-                </label>
+                <Label htmlFor='averageScore'>Average score</Label>
                 <div className='mt-2'>
                   <Select
                     required
@@ -339,12 +328,7 @@ export default function RegistrationForm() {
               </div>
               {/* Player 1 Shirt size */}
               <div className='sm:col-span-3'>
-                <label
-                  htmlFor='shirtSize'
-                  className='block text-sm font-medium leading-6 text-gray-900'
-                >
-                  Shirt size
-                </label>
+                <Label htmlFor='shirtSize'>Shirt size</Label>
                 <div className='mt-2'>
                   <Select
                     required
@@ -371,7 +355,7 @@ export default function RegistrationForm() {
             {/* Additional Player Question */}
             <div className='mt-5 space-y-10'>
               <fieldset>
-                <legend className='text-sm font-semibold leading-6 text-gray-900'>
+                <legend className='text-base font-semibold leading-6 text-gray-900 mb-2'>
                   Are you registering your teammate?
                 </legend>
                 <RadioGroup
@@ -405,12 +389,7 @@ export default function RegistrationForm() {
             {registeringTeammate === false && (
               <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
                 <div className='sm:col-span-full'>
-                  <label
-                    htmlFor='teammateName'
-                    className='block text-sm font-medium leading-6 text-gray-900'
-                  >
-                    Name of teammate
-                  </label>
+                  <Label htmlFor='teammateName'>Name of teammate</Label>
                   <div className='mt-2'>
                     <Input
                       name='teammateName'
@@ -428,18 +407,13 @@ export default function RegistrationForm() {
             {registeringTeammate && (
               <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
                 <div className='sm:col-span-full'>
-                  <p className='text-md font-semibold leading-6 text-gray-900'>
+                  <p className='text-lg font-bold leading-6 text-gray-900'>
                     Player 2
                   </p>
                 </div>
                 {/* Player 2 Name */}
                 <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='name'
-                    className='block text-sm font-medium leading-6 text-gray-900'
-                  >
-                    Name
-                  </label>
+                  <Label htmlFor='name'>Name</Label>
                   <div className='mt-2'>
                     <Input
                       name='name'
@@ -452,12 +426,7 @@ export default function RegistrationForm() {
                 </div>
                 {/* Player 2 Phone number */}
                 <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='phone'
-                    className='block text-sm font-medium leading-6 text-gray-900'
-                  >
-                    Phone number
-                  </label>
+                  <Label htmlFor='phone'>Phone</Label>
                   <div className='mt-2'>
                     <InputMask
                       mask='(999) 999-9999'
@@ -479,12 +448,7 @@ export default function RegistrationForm() {
                 </div>
                 {/* Player 2 Average score */}
                 <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='averageScore'
-                    className='block text-sm font-medium leading-6 text-gray-900'
-                  >
-                    Average score
-                  </label>
+                  <Label htmlFor='averageScore'>Average score</Label>
                   <div className='mt-2'>
                     <Select
                       required={registeringTeammate}
@@ -514,12 +478,7 @@ export default function RegistrationForm() {
                 </div>
                 {/* Player 2 Shirt size */}
                 <div className='sm:col-span-3'>
-                  <label
-                    htmlFor='shirtSize'
-                    className='block text-sm font-medium leading-6 text-gray-900'
-                  >
-                    Shirt size
-                  </label>
+                  <Label htmlFor='shirtSize'>Shirt size</Label>
                   <div className='mt-2'>
                     <Select
                       required={registeringTeammate}
