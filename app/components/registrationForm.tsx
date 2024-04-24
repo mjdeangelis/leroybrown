@@ -232,293 +232,317 @@ export default function RegistrationForm() {
     return (
       <form onSubmit={handleSubmit}>
         <div className='space-y-12'>
-          <div className='mt-10 border-gray-900/10 py-6'>
-            {/* Error display */}
-            {errors.length > 0 && (
-              <div
-                className='mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4'
-                role='alert'
-              >
-                <p className='font-bold'>Please fix the following errors:</p>
-                <ul className='list-disc pl-5'>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <h2 className='mb-2 scroll-m-20 text-2xl text-gray-900 font-semibold tracking-tight transition-colors first:mt-0'>
-              1. Team Details
-            </h2>
-            <Separator />
-
-            {/* Player 1 Details */}
-            <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
-              <div className='sm:col-span-full'>
-                <p className='text-lg font-bold leading-6 text-gray-900'>
-                  Player 1
-                </p>
-              </div>
-              {/* Player 1 Name */}
-              <div className='sm:col-span-3'>
-                <Label htmlFor='name'>Name</Label>
-                <div className='mt-2'>
-                  <Input
-                    name='name'
-                    id='name'
-                    required
-                    autoComplete='name'
-                    onChange={(e) => handleInputChange(e, "player1")}
-                    value={playerOne.name}
-                  />
-                </div>
-              </div>
-              {/* Player 1 Phone number */}
-              <div className='sm:col-span-3'>
-                <Label htmlFor='phone'>Phone number</Label>
-                <div className='mt-2'>
-                  <InputMask
-                    mask='(999) 999-9999'
-                    maskPlaceholder={null}
-                    alwaysShowMask={false}
-                    value={playerOne.phone}
-                    onChange={(e) => handleInputChange(e, "player1")}
+          {/* <div className='mt-10 border-gray-900/10 py-6'> */}
+          <div className='mt-5 border-t border-b border-gray-900/10 py-12'>
+            {/* Grid container */}
+            <div className='grid grid-cols-1 md:grid-cols-6 gap-4'>
+              <div className='order-2 md:order-1 md:col-span-4'>
+                {/* Error display */}
+                {errors.length > 0 && (
+                  <div
+                    className='mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4'
+                    role='alert'
                   >
-                    <Input
-                      type='tel'
-                      name='phone'
-                      id='phone'
-                      autoComplete='tel'
-                      placeholder='(xxx) xxx-xxxx'
-                      required
-                    />
-                  </InputMask>
-                </div>
-              </div>
-              {/* Player 1 Average score */}
-              <div className='sm:col-span-3'>
-                <Label htmlFor='averageScore'>Average score</Label>
-                <div className='mt-2'>
-                  <Select
-                    required
-                    name='averageScore'
-                    value={playerOne.averageScore}
-                    onValueChange={(value: string) =>
-                      handleInputChange(
-                        { name: "averageScore", value },
-                        "player1"
-                      )
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder='Select a score' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='70-80'>70-80</SelectItem>
-                      <SelectItem value='75-85'>75-85</SelectItem>
-                      <SelectItem value='80-90'>80-90</SelectItem>
-                      <SelectItem value='85-95'>85-95</SelectItem>
-                      <SelectItem value='90-100'>90-100</SelectItem>
-                      <SelectItem value='95-105'>95-105</SelectItem>
-                      <SelectItem value='105+'>105+</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              {/* Player 1 Shirt size */}
-              <div className='sm:col-span-3'>
-                <Label htmlFor='shirtSize'>Shirt size</Label>
-                <div className='mt-2'>
-                  <Select
-                    required
-                    name='shirtSize'
-                    value={playerOne.shirtSize}
-                    onValueChange={(value) =>
-                      handleInputChange({ name: "shirtSize", value }, "player1")
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder='Select a size' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='small'>Small</SelectItem>
-                      <SelectItem value='medium'>Medium</SelectItem>
-                      <SelectItem value='large'>Large</SelectItem>
-                      <SelectItem value='x-large'>X-Large</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
+                    <p className='font-bold'>
+                      Please fix the following errors:
+                    </p>
+                    <ul className='list-disc pl-5'>
+                      {errors.map((error, index) => (
+                        <li key={index}>{error}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-            {/* Additional Player Question */}
-            <div className='mt-5 space-y-10'>
-              <fieldset>
-                <legend className='text-base font-semibold leading-6 text-gray-900 mb-2'>
-                  Are you registering your teammate?
-                </legend>
-                <RadioGroup
-                  value={
-                    registeringTeammate
-                      ? "additional-player-yes"
-                      : "additional-player-no"
-                  }
-                  onValueChange={(value) =>
-                    handleRegisteringTeammateChange(value)
-                  }
-                >
-                  <div className='flex items-center space-x-2'>
-                    <RadioGroupItem
-                      value='additional-player-no'
-                      id='additional-player-no'
-                    />
-                    <Label htmlFor='additional-player-no'>No</Label>
-                  </div>
-                  <div className='flex items-center space-x-2'>
-                    <RadioGroupItem
-                      value='additional-player-yes'
-                      id='additional-player-yes'
-                    />
-                    <Label htmlFor='additional-player-yes'>Yes</Label>
-                  </div>
-                </RadioGroup>
-              </fieldset>
-            </div>
+                {/* Header */}
+                <h2 className='mb-2 scroll-m-20 text-2xl text-gray-900 font-semibold tracking-tight transition-colors first:mt-0'>
+                  1. Team Details
+                </h2>
+                <Separator />
 
-            {registeringTeammate === false && (
-              <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
-                <div className='sm:col-span-full'>
-                  <Label htmlFor='teammateName'>Name of teammate</Label>
-                  <div className='mt-2'>
-                    <Input
-                      name='teammateName'
-                      id='teammateName'
-                      required
-                      onChange={(e) => setTeammateName(e.target.value)}
-                      value={teammateName}
-                    />
+                {/* Player 1 details */}
+                <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
+                  <div className='sm:col-span-full'>
+                    <p className='text-lg font-bold leading-6 text-gray-900'>
+                      Player 1
+                    </p>
                   </div>
-                </div>
-              </div>
-            )}
-
-            {/* Player 2 Details */}
-            {registeringTeammate && (
-              <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
-                <div className='sm:col-span-full'>
-                  <p className='text-lg font-bold leading-6 text-gray-900'>
-                    Player 2
-                  </p>
-                </div>
-                {/* Player 2 Name */}
-                <div className='sm:col-span-3'>
-                  <Label htmlFor='name'>Name</Label>
-                  <div className='mt-2'>
-                    <Input
-                      name='name'
-                      id='name'
-                      required={registeringTeammate}
-                      onChange={(e) => handleInputChange(e, "player2")}
-                      value={playerTwo.name}
-                    />
-                  </div>
-                </div>
-                {/* Player 2 Phone number */}
-                <div className='sm:col-span-3'>
-                  <Label htmlFor='phone'>Phone</Label>
-                  <div className='mt-2'>
-                    <InputMask
-                      mask='(999) 999-9999'
-                      maskPlaceholder={null}
-                      alwaysShowMask={false}
-                      value={playerTwo.phone}
-                      onChange={(e) => handleInputChange(e, "player2")}
-                    >
+                  {/* Player 1 Name */}
+                  <div className='sm:col-span-3'>
+                    <Label htmlFor='name'>Name</Label>
+                    <div className='mt-2'>
                       <Input
-                        type='tel'
-                        name='phone'
-                        id='phone'
-                        autoComplete='tel'
-                        placeholder='(xxx) xxx-xxxx'
+                        name='name'
+                        id='name'
                         required
+                        autoComplete='name'
+                        onChange={(e) => handleInputChange(e, "player1")}
+                        value={playerOne.name}
                       />
-                    </InputMask>
+                    </div>
+                  </div>
+                  {/* Player 1 Phone number */}
+                  <div className='sm:col-span-3'>
+                    <Label htmlFor='phone'>Phone number</Label>
+                    <div className='mt-2'>
+                      <InputMask
+                        mask='(999) 999-9999'
+                        maskPlaceholder={null}
+                        alwaysShowMask={false}
+                        value={playerOne.phone}
+                        onChange={(e) => handleInputChange(e, "player1")}
+                      >
+                        <Input
+                          type='tel'
+                          name='phone'
+                          id='phone'
+                          autoComplete='tel'
+                          placeholder='(xxx) xxx-xxxx'
+                          required
+                        />
+                      </InputMask>
+                    </div>
+                  </div>
+                  {/* Player 1 Average score */}
+                  <div className='sm:col-span-3'>
+                    <Label htmlFor='averageScore'>Average score</Label>
+                    <div className='mt-2'>
+                      <Select
+                        required
+                        name='averageScore'
+                        value={playerOne.averageScore}
+                        onValueChange={(value: string) =>
+                          handleInputChange(
+                            { name: "averageScore", value },
+                            "player1"
+                          )
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder='Select a score' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value='70-80'>70-80</SelectItem>
+                          <SelectItem value='75-85'>75-85</SelectItem>
+                          <SelectItem value='80-90'>80-90</SelectItem>
+                          <SelectItem value='85-95'>85-95</SelectItem>
+                          <SelectItem value='90-100'>90-100</SelectItem>
+                          <SelectItem value='95-105'>95-105</SelectItem>
+                          <SelectItem value='105+'>105+</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  {/* Player 1 Shirt size */}
+                  <div className='sm:col-span-3'>
+                    <Label htmlFor='shirtSize'>Shirt size</Label>
+                    <div className='mt-2'>
+                      <Select
+                        required
+                        name='shirtSize'
+                        value={playerOne.shirtSize}
+                        onValueChange={(value) =>
+                          handleInputChange(
+                            { name: "shirtSize", value },
+                            "player1"
+                          )
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder='Select a size' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value='small'>Small</SelectItem>
+                          <SelectItem value='medium'>Medium</SelectItem>
+                          <SelectItem value='large'>Large</SelectItem>
+                          <SelectItem value='x-large'>X-Large</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </div>
-                {/* Player 2 Average score */}
-                <div className='sm:col-span-3'>
-                  <Label htmlFor='averageScore'>Average score</Label>
-                  <div className='mt-2'>
-                    <Select
-                      required={registeringTeammate}
-                      name='averageScore'
-                      value={playerTwo.averageScore}
-                      onValueChange={(value: string) =>
-                        handleInputChange(
-                          { name: "averageScore", value },
-                          "player2"
-                        )
+
+                {/* Additional player question */}
+                <div className='mt-5 space-y-10'>
+                  <fieldset>
+                    <legend className='text-base font-semibold leading-6 text-gray-900 mb-2'>
+                      Are you registering your teammate?
+                    </legend>
+                    <RadioGroup
+                      value={
+                        registeringTeammate
+                          ? "additional-player-yes"
+                          : "additional-player-no"
+                      }
+                      onValueChange={(value) =>
+                        handleRegisteringTeammateChange(value)
                       }
                     >
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select a score' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='70-80'>70-80</SelectItem>
-                        <SelectItem value='75-85'>75-85</SelectItem>
-                        <SelectItem value='80-90'>80-90</SelectItem>
-                        <SelectItem value='85-95'>85-95</SelectItem>
-                        <SelectItem value='90-100'>90-100</SelectItem>
-                        <SelectItem value='95-105'>95-105</SelectItem>
-                        <SelectItem value='105+'>105+</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                      <div className='flex items-center space-x-2'>
+                        <RadioGroupItem
+                          value='additional-player-no'
+                          id='additional-player-no'
+                        />
+                        <Label htmlFor='additional-player-no'>No</Label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <RadioGroupItem
+                          value='additional-player-yes'
+                          id='additional-player-yes'
+                        />
+                        <Label htmlFor='additional-player-yes'>Yes</Label>
+                      </div>
+                    </RadioGroup>
+                  </fieldset>
                 </div>
-                {/* Player 2 Shirt size */}
-                <div className='sm:col-span-3'>
-                  <Label htmlFor='shirtSize'>Shirt size</Label>
-                  <div className='mt-2'>
-                    <Select
-                      required={registeringTeammate}
-                      name='shirtSize'
-                      value={playerTwo.shirtSize}
-                      onValueChange={(value: string) =>
-                        handleInputChange(
-                          { name: "shirtSize", value },
-                          "player2"
-                        )
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select a size' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='small'>Small</SelectItem>
-                        <SelectItem value='medium'>Medium</SelectItem>
-                        <SelectItem value='large'>Large</SelectItem>
-                        <SelectItem value='x-large'>X-Large</SelectItem>
-                      </SelectContent>
-                    </Select>
+
+                {/* Name of teammate question */}
+                {registeringTeammate === false && (
+                  <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
+                    <div className='sm:col-span-full'>
+                      <Label htmlFor='teammateName'>Name of teammate</Label>
+                      <div className='mt-2'>
+                        <Input
+                          name='teammateName'
+                          id='teammateName'
+                          required
+                          onChange={(e) => setTeammateName(e.target.value)}
+                          value={teammateName}
+                        />
+                      </div>
+                    </div>
                   </div>
+                )}
+
+                {/* Player 2 details */}
+                {registeringTeammate && (
+                  <div className='mt-5 grid grid-cols-1 gap-x-6 gap-4 sm:grid-cols-6'>
+                    <div className='sm:col-span-full'>
+                      <p className='text-lg font-bold leading-6 text-gray-900'>
+                        Player 2
+                      </p>
+                    </div>
+                    {/* Player 2 Name */}
+                    <div className='sm:col-span-3'>
+                      <Label htmlFor='name'>Name</Label>
+                      <div className='mt-2'>
+                        <Input
+                          name='name'
+                          id='name'
+                          required={registeringTeammate}
+                          onChange={(e) => handleInputChange(e, "player2")}
+                          value={playerTwo.name}
+                        />
+                      </div>
+                    </div>
+                    {/* Player 2 Phone number */}
+                    <div className='sm:col-span-3'>
+                      <Label htmlFor='phone'>Phone</Label>
+                      <div className='mt-2'>
+                        <InputMask
+                          mask='(999) 999-9999'
+                          maskPlaceholder={null}
+                          alwaysShowMask={false}
+                          value={playerTwo.phone}
+                          onChange={(e) => handleInputChange(e, "player2")}
+                        >
+                          <Input
+                            type='tel'
+                            name='phone'
+                            id='phone'
+                            autoComplete='tel'
+                            placeholder='(xxx) xxx-xxxx'
+                            required
+                          />
+                        </InputMask>
+                      </div>
+                    </div>
+                    {/* Player 2 Average score */}
+                    <div className='sm:col-span-3'>
+                      <Label htmlFor='averageScore'>Average score</Label>
+                      <div className='mt-2'>
+                        <Select
+                          required={registeringTeammate}
+                          name='averageScore'
+                          value={playerTwo.averageScore}
+                          onValueChange={(value: string) =>
+                            handleInputChange(
+                              { name: "averageScore", value },
+                              "player2"
+                            )
+                          }
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder='Select a score' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value='70-80'>70-80</SelectItem>
+                            <SelectItem value='75-85'>75-85</SelectItem>
+                            <SelectItem value='80-90'>80-90</SelectItem>
+                            <SelectItem value='85-95'>85-95</SelectItem>
+                            <SelectItem value='90-100'>90-100</SelectItem>
+                            <SelectItem value='95-105'>95-105</SelectItem>
+                            <SelectItem value='105+'>105+</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    {/* Player 2 Shirt size */}
+                    <div className='sm:col-span-3'>
+                      <Label htmlFor='shirtSize'>Shirt size</Label>
+                      <div className='mt-2'>
+                        <Select
+                          required={registeringTeammate}
+                          name='shirtSize'
+                          value={playerTwo.shirtSize}
+                          onValueChange={(value: string) =>
+                            handleInputChange(
+                              { name: "shirtSize", value },
+                              "player2"
+                            )
+                          }
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder='Select a size' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value='small'>Small</SelectItem>
+                            <SelectItem value='medium'>Medium</SelectItem>
+                            <SelectItem value='large'>Large</SelectItem>
+                            <SelectItem value='x-large'>X-Large</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Buttons */}
+                <div className='mt-6 flex items-center justify-end gap-x-6'>
+                  <Button type='submit' disabled={isLoading}>
+                    {isLoading ? (
+                      <>
+                        <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+                        <span>Please wait</span>
+                      </>
+                    ) : (
+                      <span>Continue to payment</span>
+                    )}
+                  </Button>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
+              <div className='order-1 md:order-2 md:col-span-2 p-4'>
+                <div className='bg-gray-100 rounded p-4'>
+                  <h2 className='text-xl font-semibold leading-7 text-gray-900 tracking-[-0.02em] p-4'>
+                    Order Summary
+                  </h2>
+                  <Separator />
 
-        <div className='mt-6 flex items-center justify-end gap-x-6'>
-          <Button type='submit' disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
-                <span>Please wait</span>
-              </>
-            ) : (
-              <span>Continue to payment</span>
-            )}
-          </Button>
+                  <TicketSummary registeringTeammate={registeringTeammate} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     );
