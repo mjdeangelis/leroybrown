@@ -197,7 +197,9 @@ export default function RegistrationForm() {
           requestOptions
         );
         const data = await response.json();
-        if (data) {
+        if (data.error || data.errors) {
+          setErrors([GENERIC_ERROR_MESSAGE]);
+        } else {
           setIsCheckoutPage(true);
           setTeamId(data.teamId);
         }
